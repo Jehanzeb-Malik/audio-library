@@ -1,0 +1,11 @@
+# IDE
+.idea
+
+# Babel ES6 compiles files
+dist
+
+# Dependency directory
+node_modules
+
+# .env
+.env
