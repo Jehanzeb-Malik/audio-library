@@ -46,6 +46,7 @@ if (config.env === 'development') {
   }));
 }
 
+
 // mount all routes on /api path
 app.use('/api', routes);
 
@@ -56,7 +57,7 @@ app.use((err, req, res, next) => {
     const unifiedErrorMessage = err.errors.map(error => error.messages.join('. ')).join(' and ');
     const error = new APIError(unifiedErrorMessage, err.status, true);
     return next(error);
-  } else if (!(err instanceof APIError)) {
+  } if (!(err instanceof APIError)) {
     const apiError = new APIError(err.message, err.status, err.isPublic);
     return next(apiError);
   }
@@ -77,11 +78,9 @@ if (config.env !== 'test') {
 }
 
 // error handler, send stacktrace only during development
-app.use((err, req, res, next) => // eslint-disable-line no-unused-vars
-    res.status(err.status).json({
-      message: err.isPublic ? err.message : httpStatus[err.status],
-      stack: config.env === 'development' ? err.stack : {},
-    })
-);
+app.use((err, req, res, next) => res.status(err.status).json({
+  message: err.isPublic ? err.message : httpStatus[err.status],
+  stack: config.env === 'development' ? err.stack : {},
+}));
 
 export default app;

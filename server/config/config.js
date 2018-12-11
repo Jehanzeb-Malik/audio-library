@@ -26,6 +26,8 @@ const schema = Joi.object().keys({
     .description('BackBlaze B2 Application Key'),
   B2_BUCKET_ID: Joi.string().required()
     .description('BackBlaze B2 Bucket ID'),
+  SOCKET_PORT: Joi.number()
+    .default(5000),
 }).unknown()
   .required();
 
@@ -47,6 +49,7 @@ const config = {
     applicationKey: envVars.B2_APPLICATION_KEY,
     bucketId: envVars.B2_BUCKET_ID,
   },
+  socketPort: envVars.SOCKET_PORT,
 };
 
 export default config;

@@ -6,9 +6,9 @@ import songCtrl from '../controllers/song.controller';
 
 const router = express.Router(); // eslint-disable-line new-cap
 
-router.route('/list')
+router.route('/')
 
-/** GET /api/songs/lists/ */
+/** GET /api/songs/ */
   .get(validate(paramValidation.listSongs), songCtrl.list);
 
 export default router;
